@@ -1,9 +1,10 @@
-includes layout
+extends layout
 
 block content
     h1= title
-    form(action="/form", method="post")
-        input(type="text", name="name") Name: 
-        input(type="email", name="email") Email: 
+    form(action="/results", method="post")
+        input(type="text", name="name")
+        input(type="email", name="email")
         label Comments:
-        textarea#(name="comments", cols="30", rows="10")
+        textarea(name="comments", cols="30", rows="10")
+        input(type="submit")
