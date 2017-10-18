@@ -22,6 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// a middleware function with no mount path. This code is executed for every request to the router
+app.use(function (req, res, next) {
+  debug('Time:', Date.now());
+  next();
+});
+
 app.use('/', index);
 app.use('/users', users);
 
