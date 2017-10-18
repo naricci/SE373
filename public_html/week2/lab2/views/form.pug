@@ -1,23 +1,18 @@
-//- extends layout
-
-//- block content
-//-     h1= title
-//-     form(action="/results", method="post")
-//-         input(type="text", name="name")
-//-         input(type="email", name="email")
-//-         label Comments:
-//-         textarea(name="comments", cols="30", rows="10")
-//-         input(type="submit")
-
 extends layout
 
 block content
-  h1= title
-  p
-    a(href="./") Index
-  h2=message
-  form.form-horizontal(action="/form", method="post", role="form")
-        .form-group
-          label.control-label(for="name") Author         
-            input#name.form-control(name="author")        
-        input(type="submit" value="Submit")
+	h1= title
+	h2=message
+	form(action="/form", method="post", role="form")
+		div.form-group
+			label.control-label(for="name", placeholder="Enter name") Name         
+				input#name.form-control(name="name")   
+		div.form-group
+			label.control-label(for="email", placeholder="Enter email") Email         
+				input#email.form-control(name="email")
+		div.form-group
+			label.control-label(for="comments") Comments         
+				textarea#comments.form-control(name="comments", cols="30", rows="10", placeholder="Enter comments")    
+
+		input(type="submit" value="Submit")
+			

@@ -16,16 +16,6 @@ router.get('/errror', function (req, res, next) {
 	res.render('error', { title: 'Error'})
 })
 
-/* GET form page. */
-// router.get('/form', function (req, res, next) {
-// 	res.render('form', { title: 'Form' });
-// });
-
-/* POST form page. */
-// router.post('/form', function (req, res, next) {
-// 	res.render('form', [{ name: 'res.body.name' }, {email: 'res.body.email'}, {comments: 'res.body.comments'}]);
-// });
-
 /* GET & POST for form page. */
 router.get('/form', function (req, res, next) {
 
@@ -38,7 +28,7 @@ router.get('/form', function (req, res, next) {
 		message: msg
 	})
 }).post('/form', function (req, res, next) {
-	if (req.method === 'POST' && req.body.author.length) {
+	if (req.method === 'POST' && req.body.name.length) {
 
 		next()
 
@@ -49,10 +39,12 @@ router.get('/form', function (req, res, next) {
 		})
 	}
 }).post('/form', function (req, res, next) {
-	if (req.method === 'POST' && req.body.author.length) {
+	if (req.method === 'POST' && req.body.name.length) {
 		res.render('results', {
 			title: 'Form Post Page',
-			author: req.body.author
+			name: req.body.name,
+			email: req.body.email,
+			comments: req.body.comments
 		})
 
 	} else {
