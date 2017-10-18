@@ -1,7 +1,16 @@
+//- extends layout
+
+//- block content
+//-     h1= title
+//-     p= name
+//-     p= email
+//-     p= comments
+
 extends layout
 
 block content
-    h1= title
-    p= name
-    p= email
-    p= comments
+	h1=title
+	p
+		strong #{author}
+	p
+		a(href="./form") Back
