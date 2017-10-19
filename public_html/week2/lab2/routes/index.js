@@ -41,7 +41,7 @@ router.get('/form', function (req, res, next) {
 }).post('/form', function (req, res, next) {
 	if (req.method === 'POST' && req.body.name.length) {
 		res.render('results', {
-			title: 'Form Post Page',
+			title: 'Form Page',
 			name: req.body.name,
 			email: req.body.email,
 			comments: req.body.comments
