@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "SET DEBUG=demo:* & nodemon ./bin/www",
-    "eslint": "./node_modules/eslint"
+    "lint": "/node_modules/.bin/eslint"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
