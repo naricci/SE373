@@ -20,7 +20,7 @@ http.createServer(function (request, response) {
                 response.writeHead(400, {'Content-Type': 'application/json'})
                 response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
             } else {
-                /* Send the HTTP header
+            /* Send the HTTP header
              * HTTP Status: 200 : OK
              * Content Type: application/json
              */
@@ -33,7 +33,7 @@ http.createServer(function (request, response) {
         })
 	}
     
-	if (fileName === 'read-todo') {
+	else if (fileName === 'read-todo') {
 		fileName = 'read-todo.html'
 		// TODO AJAX (fetch) Request
 	}
@@ -56,12 +56,12 @@ http.createServer(function (request, response) {
 			response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
 		} else {
 			/* Send the HTTP header 
-             * HTTP Status: 200 : OK
-             * Content Type: text/html 
-             */
+			* HTTP Status: 200 : OK
+			* Content Type: text/html 
+			*/
 			response.writeHead(200, {'Content-Type': 'text/html'})
 			response.write(data.toString())
-		}     
+		}
         
 		/* the response is complete */
 		response.end()
