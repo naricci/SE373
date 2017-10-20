@@ -1,0 +1,11 @@
+body {
+	background-color: rgb(241, 165, 165);
+	padding: 50px;
+	font: 14px "Consolas", Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: rgb(0, 81, 255);
+	font-size: 20px;
+	padding-right: 10px;
+}

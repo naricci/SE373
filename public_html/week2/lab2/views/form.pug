@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h1= title
+	h2=message
+	form(action="/form", method="post", role="form")
+		div.form-group
+			label.control-label(for="name", placeholder="Enter name") Name         
+				input#name.form-control(name="name")   
+		div.form-group
+			label.control-label(for="email", placeholder="Enter email") Email         
+				input#email.form-control(name="email")
+		div.form-group
+			label.control-label(for="comments") Comments         
+				textarea#comments.form-control(name="comments", cols="30", rows="10", placeholder="Enter comments")    
+		input.btn.btn-primary(type="submit", value="Submit")
+			

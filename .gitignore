@@ -1,4 +1,8 @@
 node_modules/
 lab/
 /nbproject/
+<<<<<<< HEAD
 /.vscode/
+=======
+/.idea/
+>>>>>>> 4a844a2e6adf1409257a2440e88858346650ac88
