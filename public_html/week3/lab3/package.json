@@ -19,10 +19,13 @@
   },
   "devDependencies": {
     "eslint": "^4.9.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "pug-lint": "^2.5.0"
   },
   "nodemonConfig": {
     "verbose": true,
-    "ignore": ["public/*"]
+    "ignore": [
+      "public/*"
+    ]
   }
 }

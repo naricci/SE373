@@ -10,16 +10,16 @@
     },
     "rules": {
         "indent": [
-            "off",
-            "tab"
+            "error",
+            "2"
         ],
         "linebreak-style": [
             "warn",
             "windows"
         ],
         "quotes": [
-            "error",
-            "single"
+            "warn",
+            "double"
         ],
         "semi": [
             "error",
