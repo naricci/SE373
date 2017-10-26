@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h2= title
+  form(action="/form", method="post")
+    label Number:
+    select(name="numbox")
+      option 3
+      option 4
+      option 5
+      option 10
+      option 20
+
+    input(type="submit", value="Submit")
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
+      
+    
