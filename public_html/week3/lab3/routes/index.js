@@ -7,17 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' })
 })
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-// 	var results = [
-// 			{ author: 'Daniel', rating: 5, reviewText: 'Great Book', createdOn: '09-09-2000' },
-// 			{ author: 'Matt', rating: 3, reviewText: 'Okay Book', createdOn: '05-06-2000' },
-// 			{ author: 'Luke', rating: 2, reviewText: 'Boring Book', createdOn: '02-04-2010' }
-// 	];
-// 	res.render('index', { title: 'Express', results : results });
-// });
-
-
+/* GET form page. */
 router.get('/form', function(req, res, next) {
   const numbers = [
     { num: 3 },
@@ -26,12 +16,13 @@ router.get('/form', function(req, res, next) {
     { num: 10 },
     { num: 20 }
   ]
-  res.render('form', { title: 'Form Page' })
+  res.render('form', { title: 'Form Page', numbers : numbers })
 })
 
+/* POST form page. */
 router.post('/form', function(req, res, next) {
 		
-  req.checkBody('numbox', 'Please select a number').notEmpty()
+  req.checkBody('numbox', 'Please select a number').notEmpty().isInt()
  
   //Trim and escape the name field. 
   req.sanitize('numbox').escape()
