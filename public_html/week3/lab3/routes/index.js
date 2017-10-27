@@ -22,7 +22,7 @@ router.get('/form', function(req, res, next) {
 /* POST form page. */
 router.post('/form', function(req, res, next) {
 		
-  req.checkBody('numbox', 'Please select a number').notEmpty().isInt()
+  req.checkBody('numbox', 'Please select a number').notEmpty()
  
   //Trim and escape the name field. 
   req.sanitize('numbox').escape()

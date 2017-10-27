@@ -4,8 +4,10 @@ const path = require('path')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
 const sassMiddleware = require('node-sass-middleware')
 const debug = require('debug')('lab3:app')
+
 const index = require('./routes/index')
 const users = require('./routes/users')
 
@@ -20,6 +22,7 @@ app.set('view engine', 'pug')
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(expressValidator()) // Add this after the bodyParser middlewares!
 app.use(cookieParser())
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),

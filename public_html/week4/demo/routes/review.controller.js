@@ -1,109 +1,130 @@
-/* GET 'home info' page */
-
 
 var Review = require('./review.model');
+var debug = require('debug')('demo:review');
 
 module.exports.home = function(req, res){
-    
-    var msg = '';
-    function successCB(){
-         res.render('index', { 
-            title: 'home',
-            message : 'Review Saved'
-        });        
-    }
+        
     if (req.method === 'POST') {
+        
+       var msg = '';
         
         Review.create({
           author: req.body.name,
           rating: req.body.rating,
           reviewText: req.body.review
-        },function (err) {           
-           // saved!
-           successCB();
-        });
+        })
+        .then(function(){
+            msg = 'Review was Saved';
+            return;
+        })
+        .catch(function(err){            
+            msg = 'Review was not Saved';
+            return err.message;
+        }).then(function(err){
+            res.render('index', { 
+                title: 'home',
+                message : msg,
+                error: err
+             });
+        });   
               
     } else {
-         res.render('index', { 
+        res.render('index', { 
             title: 'home',
-            message : msg
-        });
-    }   
-    
- 
+            message : ''
+        }); 
+    }
+     
 };
 
 module.exports.view = function(req, res){
-    
-     var id = req.params.id,
-         removed = '';
- 
-    function finish() {     
        Review
        .find()
-       .exec(function(err, results){
-
-               res.render('view', { 
-                   title: 'View Results',
-                   results : results,
-                   removed : removed
-               });
-       });
-    }
-    
-     if ( id ) {         
-        Review.remove({ _id: id }, function (err) {
-            var result;
-            if (!err) {
-                 result = ' has been removed'; // success
-             } else {
-                 result =' has not been removed'; // failure
-             }
-             removed = id + result;
-             finish(); 
-        });                           
-     } else {
-      finish();
-    }
-     
+       .exec()
+       .then(function(results){
+            res.render('view', { 
+                title: 'View Results',
+                results : results
+            });
+       });   
 };
 
 
 module.exports.update = function(req, res){
     
+    //req.body.something = form information
+    //req.params.something = url string
+
     var id = req.params.id;
     var msg = '';
+    
     if (req.method === 'POST') {
          
-         id = req.body._id;
-         var query = { '_id': req.body._id };
-         var update = {
-          author: req.body.name,
-          rating: req.body.rating,
-          reviewText: req.body.review
-        };
-        var options = {};
-        var callback = function(){};
-        Review.update(query, update, options, callback);
-        msg = 'data has been updated';
+        id = req.body._id;
+
+        Review
+            .findById(id)
+            .exec() 
+            .then(function(reviewData) {
+                // figure out why the data is not saving. 
+                reviewData.author = req.body.name;
+                reviewData.rating = req.body.rating;
+                reviewData.reviewText = req.body.review;
+                debug(req.body);
+                return reviewData.save();                               
+            })
+            .then(function(){
+                msg = 'data has been updated';
+                return;
+            })
+            .catch(function(){
+                msg = 'data has NOT been updated';
+                return;
+            })
+            .then( () => {
+                finish();
+            }); 
+    } else {
+        finish();
     }
     
-    
-    Review
-    .findOne({ '_id': id })
-    .exec(function(err, results){
-    
-         if ( results ) {
+    function finish() {
+        Review
+        .findOne({ '_id': id })
+        .exec()
+        .then(function(results){    
             res.render('update', { 
                 title: 'Update Results',
                 message: msg,
                 results : results
             });
-        } else {
-             res.render('notfound', { 
+
+        })
+        .catch(function(){
+            res.render('notfound', { 
                 message: 'Sorry ID not found'
             });
-        }
-           
+        });
+    };
+};
+
+module.exports.delete = function(req, res){
+
+    var id = req.params.id,
+    removed = '';
+
+    Review.remove({ _id: id })
+    .then(function(){            
+        removed = `${id} has been removed`;
+        return;
+    })
+    .catch(function (err) {            
+        removed = `${id} has not been removed`;
+        return err; 
+    })
+    .then( (err) => {
+        res.render('delete', { 
+            removed : removed
+         });
     });
 };

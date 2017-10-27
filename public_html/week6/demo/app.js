@@ -4,8 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var queryHandler = require('./queryhandler');
 
-// Require MongoDB Database
 require('./db');
 
 var index = require('./routes/index');
@@ -25,7 +25,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+// used to display the json in pretty print format
+app.set('json spaces', 2);
+
+// enable Cross-Origin Resource Sharing (CORS)
+app.use(queryHandler.cors());
+
+app.use('/api/v1', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -43,9 +49,12 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({           
+        "error": {
+            "message": err.message,
+            "status" : err.status
+        }                    
+    });
 });
-
-require('express-debug')(app);
 
 module.exports = app;
