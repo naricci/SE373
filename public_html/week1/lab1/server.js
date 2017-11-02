@@ -10,6 +10,14 @@ http.createServer(function (request, response) {
 	if (fileName === 'todo') {
 		fileName = 'todo.html'
 		// TODO Display JSON file
+		fetch(fileName)
+			.then(function (response) {
+				return response.json()
+			})
+			.then(function (json) {
+				console.log(json)
+				console.log(fileName)
+			})
 		fileSystem.readFile(fileName , function (err, data) {
             if (err) {
                 console.error(err)
@@ -25,7 +33,7 @@ http.createServer(function (request, response) {
              * Content Type: application/json
              */
                 response.writeHead(200, {'Content-Type': 'application/json'})
-                response.write(data.toString())
+                response.write(data.json())	// was toString()
             }
 
             /* the response is complete */
