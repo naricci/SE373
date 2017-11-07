@@ -1,4 +1,4 @@
-const debug = require('debug')('demo:index')
+const debug = require('debug')('lab3:index')
 const express = require('express')
 const router = express.Router()
 
@@ -9,14 +9,15 @@ router.get('/', function(req, res, next) {
 
 /* GET form page. */
 router.get('/form', function(req, res, next) {
-  const numbers = [
-    { num: 3 },
-    { num: 4 },
-    { num: 5 },
-    { num: 10 },
-    { num: 20 }
+  var numbers = [
+    { number: 3 },
+    { number: 4 },
+    { number: 5 },
+    { number: 10 },
+    { number: 20 }
   ]
   res.render('form', { title: 'Form Page', numbers : numbers })
+  debug(numbers)
 })
 
 /* POST form page. */

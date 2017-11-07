@@ -12,5 +12,19 @@ and open the template in the editor.
     </head>
     <body>
         <div>READ TODO PAGE</div>
+
+        <script type="text/javascript">
+
+            let myRequest = 'todo.json'
+            fetch(myRequest)
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (json) {
+                    console.log(json)
+                })
+
+            console.log(myRequest)
+        </script>
     </body>
 </html>

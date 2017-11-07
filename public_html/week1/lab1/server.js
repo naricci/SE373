@@ -10,35 +10,33 @@ http.createServer(function (request, response) {
 	if (fileName === 'todo') {
 		fileName = 'todo.html'
 		// TODO Display JSON file
-		fetch(fileName)
-			.then(function (response) {
-				return response.json()
-			})
-			.then(function (json) {
-				console.log(json)
-				console.log(fileName)
-			})
-		fileSystem.readFile(fileName , function (err, data) {
-            if (err) {
-                console.error(err)
-                /* Send the HTTP header
-                 * HTTP Status: 400 : NOT FOUND
-                 * Content Type: application/json
-                 */
-                response.writeHead(400, {'Content-Type': 'application/json'})
-                response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
-            } else {
-            /* Send the HTTP header
-             * HTTP Status: 200 : OK
-             * Content Type: application/json
-             */
-                response.writeHead(200, {'Content-Type': 'application/json'})
-                response.write(data.json())	// was toString()
-            }
 
-            /* the response is complete */
-            response.end()
-        })
+	// 	fileSystem.readFile(fileName , function (err, data) {
+	// 		if (err) {
+	// 				console.error(err)
+	// 				/* Send the HTTP header
+	// 					* HTTP Status: 400 : NOT FOUND
+	// 					* Content Type: application/json
+	// 					*/
+	// 				response.writeHead(400, {'Content-Type': 'application/json'})
+	// 				response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
+	// 		} else {
+	// 		/* Send the HTTP header
+	// 			* HTTP Status: 200 : OK
+	// 			* Content Type: application/json
+	// 			*/
+	// 				response.writeHead(200, {'Content-Type': 'application/json'})
+	// 				response.write(data.json.parse())	// was toString()
+	// 		}
+
+	// 		/* the response is complete */
+	// 		response.end()
+	// })
+		fileSystem.readFile('todo.json', function (err, data) {
+			if (err) return console.error(err)
+			console.log(data.toString())
+		})
+
 	}
     
 	else if (fileName === 'read-todo') {
@@ -57,9 +55,9 @@ http.createServer(function (request, response) {
 		if (err) {
 			console.error(err)
 			/* Send the HTTP header 
-             * HTTP Status: 400 : NOT FOUND
-             * Content Type: text/html 
-             */
+						* HTTP Status: 400 : NOT FOUND
+						* Content Type: text/html 
+						*/
 			response.writeHead(400, {'Content-Type': 'text/html'})
 			response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
 		} else {
@@ -70,7 +68,7 @@ http.createServer(function (request, response) {
 			response.writeHead(200, {'Content-Type': 'text/html'})
 			response.write(data.toString())
 		}
-        
+				
 		/* the response is complete */
 		response.end()
 	}

@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "SET DEBUG=demo:* & nodemon ./bin/www"
+    "dev": "SET DEBUG=lab3:* & nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "express-validator": "^4.2.1",
+    "express-validator": "^4.3.0",
     "morgan": "~1.9.0",
     "node-sass-middleware": "0.9.8",
     "pug": "2.0.0-beta11",
@@ -24,7 +24,6 @@
   },
   "nodemonConfig": {
     "verbose": true,
-    "ignore": [
-    ]
+    "ignore": []
   }
 }

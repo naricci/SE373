@@ -1,13 +1,10 @@
-mixin generateTable(numbers)
-  -const color = ((1<<24)*Math.random()|0).toString(16)
+mixin generateTable(number)
+  -const color = ((1<<24)*Math.random(number)|0).toString(16)
   table(border="1")
     tbody
-      each num in numbers
+      each number in numbers
         tr
-        each num in numbers
+        each number in numbers
           td(style="background-color: #{color};")= color
             br
               span(style="color=fff;")= color
-      
-//mixin displayNums(numbers)
-  const numbers = [ 3, 4, 5, 10, 20 ]
