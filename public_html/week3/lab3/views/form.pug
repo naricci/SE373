@@ -3,6 +3,7 @@ extends layout
 block content
   h2= title
   form(action="/form", method="post")
+<<<<<<< HEAD
     label(for="numbers") Number:  
     select(name="numbers")
       for number in numbers
@@ -11,3 +12,15 @@ block content
     input(type="submit")
         
     
+=======
+  - var numbers = [ 3, 4, 5, 10, 20 ];
+    label Number:  
+    select(name="numbox")
+      for number in numbers
+        option(value="#{number}")= number
+
+    input(type="submit", value="Submit")
+      
+
+    
+>>>>>>> eae5caac3818744504f31f2b02f16643aee04b98
