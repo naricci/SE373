@@ -3,13 +3,13 @@ extends layout
 block content
   h2= title
   form(action="/form", method="post")
+  - var numbers = [ 3, 4, 5, 10, 20 ];
     label Number:  
     select(name="numbox")
       for number in numbers
-        option(value="#{num}")= number
+        option(value="#{number}")= number
 
     input(type="submit", value="Submit")
       
-  +generateTable(number)
-  
+
     

@@ -29,8 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('json spaces', 2)
 
 // enable Cross-Origin Resource Sharing (CORS)
-app.use(queryHandler.cors)	// was .cors()
+app.use(queryHandler.cors())	// was .cors()
 app.use(queryHandler.search())
+app.use(queryHandler.sort())
+
 
 app.use('/api/v1', index)
 app.use('/users', users)
