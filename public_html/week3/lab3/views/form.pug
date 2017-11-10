@@ -3,13 +3,11 @@ extends layout
 block content
   h2= title
   form(action="/form", method="post")
-    label Number:  
-    select(name="numbox")
+    label(for="numbers") Number:  
+    select(name="numbers")
       for number in numbers
-        option(value="#{num}")= number
+        option(value="#{number}") #{number}
 
-    input(type="submit", value="Submit")
-      
-  +generateTable(number)
-  
+    input(type="submit")
+        
     
