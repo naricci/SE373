@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var ctrlHome = require('./review.controller');
+var express = require('express')
+var router = express.Router()
+var ctrlHome = require('./employee.controller')
 
 // Routes for views
-router.all('/', ctrlHome.home);
-router.all('/index', ctrlHome.home);
-router.all('/update/:id?', ctrlHome.update);
-router.all('/view', ctrlHome.view);
+router.all('/', ctrlHome.home)
+router.all('/index', ctrlHome.home)
+router.all('/update/:id?', ctrlHome.update)
+router.all('/view', ctrlHome.view)
 router.all('/delete/:id?', ctrlHome.delete)
 
 
@@ -15,4 +15,4 @@ router.all('/delete/:id?', ctrlHome.delete)
 //   res.render('index', { title: 'Express' });
 // });
 
-module.exports = router;
+module.exports = router

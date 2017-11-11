@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "SET DEBUG=lab4:* & nodemon ./bin/www"
+    "dev:pc": "SET DEBUG=lab4:* & nodemon ./bin/www",
+    "dev:mac": "DEBUG=lab4:* & nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
