@@ -1,5 +1,49 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	// Main Navbar
+	nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.container
+		a.navbar-brand(href='index') LAB 4
+
+		div.collapse.navbar-collapse(id='navbarSupportedContent')
+			ul.navbar-nav.mr.auto
+				li.nav-item
+					a.nav-link(href='view') View Employees
+				li.nav-item
+					a.nav-link(href='https://github.com/naricci/SE373') GitHub
+
+	// Main Content Area
+	div.container(id='mainContent')
+		h1= title
+		p.text-danger=message
+
+		form(action="/" method="post" role="form")
+			.form-group
+				label.control-label(for="firstName") First Name
+				.col
+					input#firstName.form-control(name="firstName" required)
+			.form-group
+				label.control-label(for="lastName") Last Name
+				.col
+					input#lastName.form-control(name="lastName" required)
+			.form-group
+				label.control-label(for="department") Department
+				.col
+					select#department.form-control.input-sm(name="department" required)
+						option Select a department
+						option Cell Phones
+						option Computers
+						option Home Theater
+			.form-group
+				label.control-label(for="startDate") Start Date
+				.col
+					input#startDate.form-control(type="date", name="startDate" required)
+			.form-group
+				label.control-label(for="jobTitle") Job Title
+				.col
+					input#jobTitle.form-control(name="jobTitle" required)
+			.form-group
+				label.control-label(for="salary") Salary
+				.col
+					input#salary.form-control(name="salary" required)
+			input.btn.btn-primary(type="submit" value="Add Employee") 

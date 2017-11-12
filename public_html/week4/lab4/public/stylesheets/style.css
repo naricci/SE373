@@ -1,6 +1,28 @@
 body {
+  background-color: whitesmoke;
+  font-family:  'Fira Code', Monaco, 'Courier New', monospace;
+  font-size: 14px;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+nav {
+  font-family: Helvetica, sans-serif;
+}
+
+h1 {
+  font-family: Helvetica, sans-serif;
+}
+
+label {
+  font-weight: bold;
+}
+
+input.form-control {
+  background-color: lightgoldenrodyellow;
+}
+
+select.form-control {
+  background-color: lightgoldenrodyellow;
 }
 
 a {

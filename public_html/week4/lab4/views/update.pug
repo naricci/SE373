@@ -1,3 +1,46 @@
 extends layout
 
 block content
+	// Main Navbar
+	nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.container
+		a.navbar-brand(href='index') LAB 4
+
+		div.collapse.navbar-collapse(id='navbarSupportedContent')
+			ul.navbar-nav.mr.auto
+				li.nav-item
+					a.nav-link(href='view') View Employees
+				li.nav-item
+					a.nav-link(href='https://github.com/naricci/SE373') GitHub
+
+	// Main Content Area
+	div.container(id='mainContent')
+		h1=title
+		form(action='/update' method='post' role='form')
+			.form-group
+				label.control-label(for='firstName') First Name
+				.col
+					input#firstName.form-control(name='firstName' value=results.firstName)
+				label.control-label(for='lastName') Last Name
+				.col
+					input#lastName.form-control(name='lastName' value=results.lastName)
+			.form-group
+				label.control-label(for='department') Department
+				.col
+					select#department.form-control.input-sm(name='department')
+						option(selected=results.department == "Cell Phones") Cell Phones
+						option(selected=results.department == "Computers") Computers
+						option(selected=results.department == "Home Theater") Home Theater
+			.form-group
+				label.control-label(for='startDate') Start Date
+				.col
+					input#startDate.form-control(type='date' name='startDate')
+			.form-group
+				label.control-label(for='jobTitle') Job Title
+				.col
+					input#jobTitle.form-control(name='startDate')
+			.form-group
+				label.control-label(for='salary') Salary
+				.col
+					input#salary.form-control(name='salary')
+			input(type='hidden' name='_id' value=results._id)
+			input.btn.btn-primary(type='submit' value='Add Employee') 
