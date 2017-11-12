@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var debug = require('debug')('lab4:mongo')
 var gracefulShutdown
-var dbURI = 'mongodb://localhost/Employees'
+var dbURI = 'mongodb://localhost/Empl'
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI
 }

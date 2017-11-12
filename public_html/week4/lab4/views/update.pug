@@ -3,18 +3,22 @@ extends layout
 block content
 	// Main Navbar
 	nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.container
-		a.navbar-brand(href='index') LAB 4
+		a.navbar-brand(href='#') LAB 4
 
 		div.collapse.navbar-collapse(id='navbarSupportedContent')
 			ul.navbar-nav.mr.auto
 				li.nav-item
-					a.nav-link(href='view') View Employees
+					a.nav-link(href='../../index') Home
+				li.nav-item
+					a.nav-link(href='../view') View
 				li.nav-item
 					a.nav-link(href='https://github.com/naricci/SE373') GitHub
 
 	// Main Content Area
 	div.container(id='mainContent')
 		h1=title
+		p.text-danger=message
+		p=removed
 		form(action='/update' method='post' role='form')
 			.form-group
 				label.control-label(for='firstName') First Name
@@ -33,14 +37,14 @@ block content
 			.form-group
 				label.control-label(for='startDate') Start Date
 				.col
-					input#startDate.form-control(type='date' name='startDate')
+					input#startDate.form-control(type='date' name='startDate' value=results.startDate)
 			.form-group
 				label.control-label(for='jobTitle') Job Title
 				.col
-					input#jobTitle.form-control(name='startDate')
+					input#jobTitle.form-control(name='jobTitle' value=results.jobTitle)
 			.form-group
 				label.control-label(for='salary') Salary
 				.col
-					input#salary.form-control(name='salary')
+					input#salary.form-control(name='salary' value=results.salary)
 			input(type='hidden' name='_id' value=results._id)
-			input.btn.btn-primary(type='submit' value='Add Employee') 
+			input.btn.btn-primary(type='submit' value='Update Employee') 

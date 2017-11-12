@@ -28,6 +28,6 @@ var employeeSchema = new mongoose.Schema({
   }
 })
 
-var Employee = mongoose.model('Employee', employeeSchema)
+var Empl = mongoose.model('Empl', employeeSchema)
 
-module.exports = Employee
+module.exports = Empl

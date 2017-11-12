@@ -1,6 +1,6 @@
 
-var Employee = require('./employee.model')
-var debug = require('debug')('lab4:employee')
+var Empl = require('./employee.model')
+var debug = require('debug')('lab4:employee.controller')
 
 module.exports.home = function (req, res) {
 
@@ -8,7 +8,7 @@ module.exports.home = function (req, res) {
 
     var msg = ''
 
-    Employee.create({
+    Empl.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       department: req.body.department,
@@ -25,7 +25,7 @@ module.exports.home = function (req, res) {
         return err.message
       }).then(function (err) {
         res.render('index', {
-          title: 'home',
+          title: 'Add Employee',
           message: msg,
           error: err
         })
@@ -33,19 +33,19 @@ module.exports.home = function (req, res) {
 
   } else {
     res.render('index', {
-      title: 'home',
+      title: 'Add Employee',
       message: ''
     })
   }
 }
 
 module.exports.view = function (req, res) {
-  Employee
+  Empl
     .find()
     .exec()
     .then(function (results) {
       res.render('view', {
-        title: 'View Results',
+        title: 'View Employees',
         results: results
       })
     })
@@ -54,9 +54,6 @@ module.exports.view = function (req, res) {
 
 module.exports.update = function (req, res) {
 
-  //req.body.something = form information
-  //req.params.something = url string
-
   var id = req.params.id
   var msg = ''
 
@@ -64,11 +61,11 @@ module.exports.update = function (req, res) {
 
     id = req.body._id
 
-    Employee
+    Empl
       .findById(id)
       .exec()
       .then(function (employeeData) {
-        // figure out why the data is not saving. 
+        // figure out why the data is not saving.
         employeeData.firstName = req.body.firstName
         employeeData.lastName = req.body.lastName
         employeeData.department = req.body.department
@@ -94,7 +91,7 @@ module.exports.update = function (req, res) {
   }
 
   function finish() {
-    Employee
+    Empl
       .findOne({ '_id': id })
       .exec()
       .then(function (results) {
@@ -118,7 +115,7 @@ module.exports.delete = function (req, res) {
   var id = req.params.id,
     removed = ''
 
-  Employee.remove({ _id: id })
+  Empl.remove({ _id: id })
     .then(function () {
       removed = `${id} has been removed`
       return

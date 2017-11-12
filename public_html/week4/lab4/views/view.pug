@@ -3,12 +3,14 @@ extends layout
 block content
 	// Main Navbar
 	nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.container
-		a.navbar-brand(href='index') LAB 4
+		a.navbar-brand(href='#') LAB 4
 
 		div.collapse.navbar-collapse(id='navbarSupportedContent')
 			ul.navbar-nav.mr.auto
 				li.nav-item
-					a.nav-link(href='view') View Employees
+					a.nav-link(href='index') Home
+				li.nav-item
+					a.nav-link(href='view') View
 				li.nav-item
 					a.nav-link(href='https://github.com/naricci/SE373') GitHub
 
@@ -40,4 +42,4 @@ block content
 							td: a(href='../update/'+result._id) Update
 							td: a(href='../delete/'+result._id) Delete
 		else
-			p No results found
+			p.text-danger No results found
