@@ -1,6 +1,6 @@
 var express = require('express')
 var path = require('path')
-var favicon = require('serve-favicon')
+//var favicon = require('serve-favicon')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
@@ -28,14 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('json spaces', 2)
 
 // enable Cross-Origin Resource Sharing (CORS)
-app.use(function(reg, res, next){
+app.use(function (reg, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept')
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE')   
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE')
   next()
 })
 
-app.use('/api/v1', index)
+app.use('/api/vl', index)
 app.use('/users', users)
 
 // catch 404 and forward to error handler
@@ -53,11 +53,12 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500)
-  res.json({           
+  //res.render('error')
+  res.json({
     'error': {
       'message': err.message,
-      'status' : err.status
-    }                    
+      'status': err.status
+    }
   })
 })
 
