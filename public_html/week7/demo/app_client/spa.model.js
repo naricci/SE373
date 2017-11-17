@@ -1,118 +1,106 @@
-class Model {
-                
+class Model extends BaseModel {
+
     constructor() {
-       this.APIS = {
-           Reviews : 'http://localhost:3001/api/v1/reviews/'
-       }
-       this.dataBind = {}
-
-       this.http = {
-           get: (url) => {
-               return this.httpFetch(url, null, 'GET').then( response => response.json())
-           },
-           post: (url, data) => {
-               return this.httpFetch(url, data, 'POST').then( response => response.json())
-           },
-           put: (url, data) => {
-               return this.httpFetch(url, data, 'PUT').then( response => response.json())
-           },
-           delete: (url) => {
-               return this.httpFetch(url, null, 'DELETE')
-           }
-       }
-   }
-
-
-   httpFetch(url, data, verb){                    
-       let myHeaders = new Headers()
-       myHeaders.set('Content-Type', 'application/json')
-       let myInit = { method: verb, headers: myHeaders, mode: 'cors', cache: 'default'}                    
-       if ( data ) {
-           myInit.body = JSON.stringify(data)
-       }
-       const myRequest = new Request(url, myInit);                
-       return fetch(myRequest)
-               .then(response => {
-                   if (!response.ok) throw Error(response.statusText)
-                   return response;
-               })                            
-   }
-   
-   getURLParams(){
-       return new URLSearchParams(window.location.search);
-   }
-
-   getReviews() {
-       return this.http.get(this.APIS.Reviews)
-              .then( data => {
-                   return this.dataBind.reviewTable = Components.resultsData(data) 
-               })                       
-   }
-
-   saveReviews() {
-       const data = {
-           author : this.dataBind.author,
-           rating : this.dataBind.rating,
-           reviewText : this.dataBind.reviewText
-       }                    
-       return this.http.post(this.APIS.Reviews, data)
-               .then( data => {
-                   this.dataBind.saveResultMsg = 'Review Saved'
-                   return data
-               }).catch( err => {
-                   this.dataBind.saveResultMsg = 'Review NOT Saved'   
-                   return err
-               })                   
-   }
-
-   deleteReview(evt) {
+        super()  
+        this.APIS = {
+            Reviews : `//${window.location.hostname}:3001/api/v1/reviews/`
+        }
+    }
+    
+    
+    getReviewList() {
+        return this.http.get(this.APIS.Reviews)
+                .then( data => {
+                    data.forEach((review) => {
+                        review.createdOnFormated = this.formatDate(review.createdOn)
+                    })
+                   return Components.todoTable(data).then(html => { return this.dataBindModel.todoTable = html })
+                })
+    }
+    
+    deleteTodo(evt) {
        const url = `${this.APIS.Reviews}${evt.target.dataset.id}`
        return this.http.delete(url)
-               .then( ()=>{
-                   return this.dataBind.deleteResultMsg = 'Review Deleted'                                
-               }).catch( err => {
-                    return this.dataBind.deleteResultMsg = 'Review NOT Deleted'                                 
-               }).then( () => {
-                   return this.getReviews()
-               })
-   }
-
-   updateAuthor(evt){
-       this.dataBind.author = evt.target.value
-       return Promise.resolve()
-   }
-   
-   updatePage(evt){       
-       const params = `?id=${evt.target.dataset.id}`       
-       window.location.href =  `${params}#update` 
-       return Promise.resolve()
-   }
-   
-   updatePageLoad(){
-       const url = `${this.APIS.Reviews}${this.getURLParams().get('id')}`
-       return this.http.get(url).then( data => {           
-           this.dataBind.author = data.author
-           this.dataBind.rating = data.rating
-           this.dataBind.reviewText = data.reviewText
-           this.dataBind._id = data._id
-           return data
-       })       
-   }
-   
-   updateReviews(){
-       const data = {
-           author : this.dataBind.author,
-           rating : this.dataBind.rating,
-           reviewText : this.dataBind.reviewText
-       }  
-       const url = `${this.APIS.Reviews}${this.dataBind._id}`
-       return this.http.put(url, data)
-               .then( data => {
-                   this.dataBind.updateResultMsg = 'Review updated'
+                .then( ()=>{
+                   return this.dataBindModel.deleteResultMsg = 'Review Deleted'                                
+                }).catch( err => {
+                    return this.dataBindModel.deleteResultMsg = 'Review was NOT Deleted'                                 
+                }).then( () => {
+                   return this.getReviewList()
+                })
+    
+    }
+    
+    saveReview(evt) {
+        
+        let form = evt.target.form        
+        if (!form.checkValidity()) {
+            this.dataBindModel.saveResultMsg = 'All fields are required'
+            return Promise.resolve()
+        }
+        const data = {
+           author : this.dataBindModel.author,
+           rating : this.dataBindModel.rating,
+           reviewText : this.dataBindModel.reviewText
+        }                    
+        return this.http.post(this.APIS.Reviews, data)
+                .then( data => {
+                   this.dataBindModel.saveResultMsg = 'Review Saved'
                    return data
-               }).catch( err => {
-                   this.dataBind.updateResultMsg = 'Review NOT updated'   
+                }).catch( err => {
+                   this.dataBindModel.saveResultMsg = 'Review was NOT Saved'   
                    return err
-               })  
-   }
+                })  
+    }
+    
+    goToUpdatePage(evt) {
+        this.redirect('update',{id: evt.target.dataset.id})
+        return Promise.resolve()
+    }
+        
+    updatePageLoad() {
+        const url = `${this.APIS.Reviews}${this.urlParams().get('id')}`
+        return this.http.get(url).then( data => {           
+            this.dataBindModel = {author: data.author, rating: data.rating, reviewText: data.reviewText, _id: data._id }
+            return data
+        })     
+    }
+
+    updateTodo(evt) {
+        let form = evt.target.form        
+         if (!form.checkValidity()) {
+             this.dataBindModel.updateResultMsg = 'All fields are required'
+             return Promise.resolve()
+         }
+        const data = {
+            author : this.dataBindModel.author,
+            rating : this.dataBindModel.rating,
+            reviewText : this.dataBindModel.reviewText
+        }
+         const url = `${this.APIS.Reviews}${this.dataBindModel._id}`
+         return this.http.put(url, data)
+                 .then( data => {
+                     this.dataBindModel.updateResultMsg = 'Review updated'
+                     return data
+                 }).catch( err => {
+                     this.dataBindModel.updateResultMsg = 'Review was NOT updated'   
+                     return err
+                 })  
+    }
+
+    get isDeleted() {
+        const msg = this.dataBindModel.deleteResultMsg
+        return msg && msg.toLowerCase().indexOf('not') === -1
+    }
+
+    get isAdded() {
+        const msg = this.dataBindModel.saveResultMsg
+        return msg && msg.toLowerCase().indexOf('not') === -1 && msg.toLowerCase().indexOf('required') === -1
+    }
+
+    get isUpdated() {
+        const msg = this.dataBindModel.updateResultMsg
+        return msg && msg.toLowerCase().indexOf('not') === -1 && msg.toLowerCase().indexOf('required') === -1
+    }
+
 }

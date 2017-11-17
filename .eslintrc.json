@@ -9,7 +9,8 @@
 	},
 	"extends": "eslint:recommended",
 	"parserOptions": {
-		"sourceType": "script"
+		"ecmaVersion": 6,
+		"sourceType": "module"
 	},
 	"rules": {
 		"indent": [
