@@ -35,7 +35,7 @@ app.use(function (reg, res, next) {
   next()
 })
 
-app.use('/api/vl', index)
+app.use('/api/v1', index)
 app.use('/users', users)
 
 // catch 404 and forward to error handler
