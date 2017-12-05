@@ -1,5 +1,5 @@
 
-var Employees = require('./employee.model')
+var employee = require('./employee.model')
 var debug = require('debug')('lab4:employee.controller')
 
 module.exports.home = function (req, res) {
@@ -8,7 +8,7 @@ module.exports.home = function (req, res) {
 
     var msg = ''
 
-    Employees.create({
+    employee.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       department: req.body.department,
@@ -40,7 +40,7 @@ module.exports.home = function (req, res) {
 }
 
 module.exports.view = function (req, res) {
-  Employees
+  employee
     .find()
     .exec()
     .then(function (results) {
@@ -61,7 +61,7 @@ module.exports.update = function (req, res) {
 
     id = req.body._id
 
-    Employees
+    employee
       .findById(id)
       .exec()
       .then(function (employeeData) {
@@ -91,7 +91,7 @@ module.exports.update = function (req, res) {
   }
 
   function finish() {
-    Employees
+    employee
       .findOne({ '_id': id })
       .exec()
       .then(function (results) {
@@ -115,7 +115,7 @@ module.exports.delete = function (req, res) {
   var id = req.params.id,
     removed = ''
 
-  Employees.remove({ _id: id })
+  employee.remove({ _id: id })
     .then(function () {
       removed = `${id} has been removed`
       return

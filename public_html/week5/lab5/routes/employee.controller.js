@@ -1,5 +1,5 @@
-var employees = require('./employee.model')
-var debug = require('debug')('demo:employee')
+var employee = require('./employee.model')
+var debug = require('debug')('lab5:employee.controller')
 
 function sendJSONresponse(res, status, content) {
   res.status(status)
@@ -9,7 +9,7 @@ function sendJSONresponse(res, status, content) {
 module.exports.employeesReadAll = function(req, res) {
 
   debug('Getting all employees')
-  employees
+	employee
     .find()
     .exec()
     .then(function(results){
@@ -26,7 +26,7 @@ module.exports.employeesReadOne = function(req, res) {
   if (req.params && req.params.employeeid) {
     debug('Getting single employee with id =', req.params.employeeid )
 
-    employees
+		employee
       .findById(req.params.employeeid)
       .exec()
       .then(function(results){
@@ -51,7 +51,7 @@ module.exports.employeesCreate = function(req, res) {
 
   debug('Creating an employee with data ', req.body)
 
-  employees.create({
+	employee.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     department: req.body.department,
@@ -79,7 +79,7 @@ module.exports.employeesUpdateOne = function(req, res) {
     return
   }
 
-  employees
+	employee
     .findById(req.params.employeeid)
     .exec()
     .then(function(employeeData) {
@@ -109,7 +109,7 @@ module.exports.employeesDeleteOne = function(req, res) {
     return
   }
 
-  employees
+	employee
     .findByIdAndRemove(req.params.employeeid)
     .exec()
     .then(function(data){
