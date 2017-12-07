@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('json spaces', 2)
 
 // enable Cross-Origin Resource Sharing (CORS)
-app.use(function (reg, res, next) {
+app.use(function (req, res, next) {	//was reg, changed to req
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept')
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE')

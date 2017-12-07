@@ -1,5 +1,5 @@
 var employee = require('./employee.model')
-var debug = require('debug')('lab5:employee.controller')
+var debug = require('debug')('lab5:employee')
 
 function sendJSONresponse(res, status, content) {
   res.status(status)
@@ -9,7 +9,7 @@ function sendJSONresponse(res, status, content) {
 module.exports.employeesReadAll = function(req, res) {
 
   debug('Getting all employees')
-	employee
+  employee
     .find()
     .exec()
     .then(function(results){
@@ -26,7 +26,7 @@ module.exports.employeesReadOne = function(req, res) {
   if (req.params && req.params.employeeid) {
     debug('Getting single employee with id =', req.params.employeeid )
 
-		employee
+    employee
       .findById(req.params.employeeid)
       .exec()
       .then(function(results){
@@ -51,7 +51,7 @@ module.exports.employeesCreate = function(req, res) {
 
   debug('Creating an employee with data ', req.body)
 
-	employee.create({
+  employee.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     department: req.body.department,
@@ -79,15 +79,15 @@ module.exports.employeesUpdateOne = function(req, res) {
     return
   }
 
-	employee
+  employee
     .findById(req.params.employeeid)
     .exec()
     .then(function(employeeData) {
       employeeData.firstName = req.body.firstName
       employeeData.lastName = req.body.lastName
-      employeeData.department = req.body.department,
-      employeeData.startDate = req.body.startDate,
-      employeeData.jobTitle = req.body.jobTitle,
+      employeeData.department = req.body.department
+      employeeData.startDate = req.body.startDate
+      employeeData.jobTitle = req.body.jobTitle
       employeeData.salary = req.body.salary
 
       return employeeData.save()
@@ -109,7 +109,7 @@ module.exports.employeesDeleteOne = function(req, res) {
     return
   }
 
-	employee
+  employee
     .findByIdAndRemove(req.params.employeeid)
     .exec()
     .then(function(data){

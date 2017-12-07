@@ -31,27 +31,27 @@
 	<br />
 	<br /> Resource for endpoint:
 	<br />
-	<input name="resource" value="employees/" />
+	<input name="resource" value="employees/">
 	<br />
 	<br /> Data(optional):
 
 	<br /> First Name
-	<input type="text" name="firstName" value="" />
+	<input type="text" name="firstName" value="">
 	<br /> Last Name
-	<input type="text" name="lastName" value="" />
+	<input type="text" name="lastName" value="">
 	<br> Department
 	<input type="text" name="department" list="departments" placeholder="Cell Phones">
 	<br> Start Date
-	<input type="date" name="startDate">
+	<input type="date" name="startDate" value="">
 	<br> Job Title
-	<input type="text" name="JobTitle">
+	<input type="text" name="jobTitle" value="">
 	<br> Salary
-	<input type="number" name="salary">
+	<input type="number" name="salary" value="">
 	<br />
 	<br />
 	<button>Make Call</button>
 	<h3>Employees</h3>
-	<input name="query" size="70" readonly />
+	<input name="query" size="70" readonly>
 	<br />
 	<textarea name="results" readonly></textarea>
 
@@ -80,6 +80,7 @@
 			let verbfield = document.querySelector('select[name="verb"]');
 			let verb = verbfield.options[verbfield.selectedIndex].value;
 			let resource = document.querySelector('input[name="resource"]').value;
+			
 			let results = document.querySelector('textarea[name="results"]');
 			let url = `http://localhost:3001/api/v1/${resource}`;
 
