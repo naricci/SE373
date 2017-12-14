@@ -6,25 +6,54 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Read Todo Page</title>
+        <title>READ-TODO</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>READ TODO PAGE</div>
-
-        <script type="text/javascript">
-
-            let myRequest = 'todo.json'
+        <h1>READ-TODO</h1>
+        
+         <script type="text/javascript">
+                      
+            let myRequest = 'todo.json';
+            
             fetch(myRequest)
-                .then(function (response) {
-                    return response.json()
-                })
-                .then(function (json) {
-                    console.log(json)
-                })
+            .then(function(response) {              
+                  return response.json();               
+            })
+            .then(function(json) {
+                console.log(json);
+        
+            for (var i = 0; i < json.length; i++) {
+                let myString = '';
+                
+                myString += '<table>';
+                myString += '<tr>';
+                myString += '<td>' + json[i].userId + '</td>';
+                myString += '<td>' + json[i].id + '</td>';
+                myString += '<td>' + json[i].title + '</td>';
+                myString += '<td>' + json[i].completed + '</td>';
+                myString += '</tr>';
+                myString += '</table>';
+                
+                document.querySelector('tbody').innerHTML += myString;
+                }
+         });
+          
 
-            console.log(myRequest)
+            
         </script>
+        
+        <table>
+            <tr>
+                <th>UserID</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Completed</th>
+            </tr>
+            <tbody></tbody>
+        </table>
+        
+        <a href="todo.json">ToDo</a> <a href="read-todo.html">Read-ToDo</a>
     </body>
 </html>

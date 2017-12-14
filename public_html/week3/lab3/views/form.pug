@@ -3,24 +3,20 @@ extends layout
 block content
   h2= title
   form(action="/form", method="post")
-<<<<<<< HEAD
     label(for="numbers") Number:  
     select(name="numbers")
-      for number in numbers
-        option(value="#{number}") #{number}
+      //each number in numbers
+      option(value="3") 3
+      option(value="4") 4
+      option(value="5") 5
+      option(value="10") 10
+      option(value="20") 20
 
-    input(type="submit")
+    input(type="submit" value="Submit")
+
+    if errors 
+      ul
+        for error in errors
+          li!= error.msg
         
     
-=======
-  - var numbers = [ 3, 4, 5, 10, 20 ];
-    label Number:  
-    select(name="numbox")
-      for number in numbers
-        option(value="#{number}")= number
-
-    input(type="submit", value="Submit")
-      
-
-    
->>>>>>> eae5caac3818744504f31f2b02f16643aee04b98

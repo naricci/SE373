@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "SET DEBUG=lab3:* & nodemon ./bin/www"
+    "dev:pc": "SET DEBUG=lab3:* & nodemon ./bin/www",
+    "dev:mac": "DEBUG=lab3:* nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -18,12 +19,6 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "eslint": "^4.9.0",
-    "nodemon": "^1.12.1",
-    "pug-lint": "^2.5.0"
-  },
-  "nodemonConfig": {
-    "verbose": true,
-    "ignore": []
+    "nodemon": "^1.12.1"
   }
 }

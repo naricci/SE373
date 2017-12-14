@@ -9,15 +9,15 @@ router.get('/', function(req, res, next) {
 
 /* GET form page. */
 router.get('/form', function(req, res, next) {
-  const numbers = [
+  var numbers = [
     { number: 3 },
     { number: 4 },
     { number: 5 },
     { number: 10 },
     { number: 20 }
   ]
-  res.render('form', { title: 'Form Page', numbers : numbers })
-  //debug(numbers)
+  res.render('form', { title: 'Form Page'/*, numbers : numbers*/ })
+  // debug(numbers)
 })
 
 /* POST form page. */
@@ -25,16 +25,16 @@ router.post('/form', function(req, res, next) {
 
   req.checkBody('numbers', 'Please select a number').notEmpty()
 
-  //Trim and escape the name field.
+  // Trim and escape the name field.
   req.sanitize('numbers').escape()
   req.sanitize('numbers').trim()
 
-  //Run the validators
+  // Run the validators
   var errors = req.validationErrors()
 
   // Call debug function to log errors in terminal console
   debug(errors)
-  res.render('form', { title: req.body.numbox, errors: errors })
+  res.render('form', { title: req.body.numbers, errors: errors })
 })
 
 module.exports = router

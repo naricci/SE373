@@ -1,15 +1,17 @@
 {
-	"name": "lab1",
-	"version": "1.0.0",
-	"description": "",
-	"main": "server.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server.js"
-	},
-	"author": "Nick Ricci",
-	"license": "ISC",
-	"devDependencies": {
-		"eslint": "^4.8.0"
-	}
+  "name": "lab1",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Nicholas Ricci",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
 }

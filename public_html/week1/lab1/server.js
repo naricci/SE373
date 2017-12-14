@@ -1,77 +1,61 @@
-const http = require('http')
-const url = require('url')
-const fileSystem = require('fs')
+
+
+var http = require('http')
+var url = require('url')
+var fileSystem = require('fs')
+
 
 http.createServer(function (request, response) {
-    
-	let pathName = url.parse(request.url).pathname
-	let fileName = pathName.substr(1) /* lets remove the "/" from the name */
 
-	if (fileName === 'todo') {
-		fileName = 'todo.html'
-		// TODO Display JSON file
+  var pathName = url.parse(request.url).pathname
+  var fileName = pathName.substr(1) /* lets remove the "/" from the name */
+  var dfltType = 'text/html'
 
-	// 	fileSystem.readFile(fileName , function (err, data) {
-	// 		if (err) {
-	// 				console.error(err)
-	// 				/* Send the HTTP header
-	// 					* HTTP Status: 400 : NOT FOUND
-	// 					* Content Type: application/json
-	// 					*/
-	// 				response.writeHead(400, {'Content-Type': 'application/json'})
-	// 				response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
-	// 		} else {
-	// 		/* Send the HTTP header
-	// 			* HTTP Status: 200 : OK
-	// 			* Content Type: application/json
-	// 			*/
-	// 				response.writeHead(200, {'Content-Type': 'application/json'})
-	// 				response.write(data.json.parse())	// was toString()
-	// 		}
+  if (fileName == 'index'){
 
-	// 		/* the response is complete */
-	// 		response.end()
-	// })
-		fileSystem.readFile('todo.json', function (err, data) {
-			if (err) return console.error(err)
-			console.log(data.toString())
-		})
+    fileName = 'index.html'
+  }
 
-	}
-    
-	else if (fileName === 'read-todo') {
-		fileName = 'read-todo.html'
-		// TODO AJAX (fetch) Request
-	}
-    
-	else if (fileName === '' || fileName === 'index') {
-		fileName = 'index.html'
-	}
+  else if (fileName == 'todo' || fileName == 'todo.json'){
+    dfltType = 'application/json'
+    fileName = 'todo.json'
+  }
 
-	/* lets try to read the html page found */
-	fileSystem.readFile(fileName , callback)
+  else if (fileName == 'read-todo' || fileName =='read-todo.html'){
 
-	function callback(err, data) {
-		if (err) {
-			console.error(err)
-			/* Send the HTTP header 
-						* HTTP Status: 400 : NOT FOUND
-						* Content Type: text/html 
-						*/
-			response.writeHead(400, {'Content-Type': 'text/html'})
-			response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
-		} else {
-			/* Send the HTTP header 
-			* HTTP Status: 200 : OK
-			* Content Type: text/html 
-			*/
-			response.writeHead(200, {'Content-Type': 'text/html'})
-			response.write(data.toString())
-		}
-				
-		/* the response is complete */
-		response.end()
-	}
+    fileName = 'read-todo.html'
+  }
+
+  else {
+
+    fileName = 'index.html'
+  }
+
+  /* lets try to read the html page found */
+  fileSystem.readFile(fileName , callback)
+
+  function callback(err, data) {
+    if (err) {
+      console.error(err)
+      /* Send the HTTP header
+             * HTTP Status: 400 : NOT FOUND
+             * Content Type: text/html
+             */
+      response.writeHead(400, {'Content-Type': 'text/html'})
+      response.write('<!DOCTYPE html><html><body><div>Page Not Found</div></body></html>')
+    } else {
+      /* Send the HTTP header
+             * HTTP Status: 200 : OK
+             * Content Type: text/html
+             */
+      response.writeHead(200, {'Content-Type': dfltType})
+      response.write(data.toString())
+    }
+
+    /* the response is complete */
+    response.end()
+  }
+
 
 }).listen(3000)
 
